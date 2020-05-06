@@ -1,0 +1,574 @@
+[45m[1m[37mStarting MaskFusion build script ...[0m[0m[0m
+Available parameters:
+        --install-packages
+        --install-cuda
+        --build-dependencies
+[45m[1m[37mSetting up virtual python environment...[0m[0m[0m
+[45m[1m[37mBuilding opencv...[0m[0m[0m
+Already up-to-date.
+-- Looking for ccache - not found
+-- Found ZLIB: /opt/conda/lib/libz.so (found suitable version "1.2.11", minimum required is "1.2.3") 
+-- Found ZLIB: /opt/conda/lib/libz.so (found version "1.2.11") 
+-- Checking for module 'gtk+-3.0'
+--   No package 'gtk+-3.0' found
+-- Checking for module 'gtk+-2.0'
+--   No package 'gtk+-2.0' found
+-- Checking for module 'gthread-2.0'
+--   No package 'gthread-2.0' found
+-- Looking for linux/videodev.h
+-- Looking for linux/videodev.h - not found
+-- Looking for linux/videodev2.h
+-- Looking for linux/videodev2.h - found
+-- Looking for sys/videoio.h
+-- Looking for sys/videoio.h - not found
+-- Checking for modules 'libavcodec;libavformat;libavutil;libswscale'
+--   No package 'libavcodec' found
+--   No package 'libavformat' found
+--   No package 'libavutil' found
+--   No package 'libswscale' found
+-- Checking for module 'libavresample'
+--   No package 'libavresample' found
+-- found Intel IPP (ICV version): 2017.0.3 [2017.0.3]
+-- at: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/opencv/build/3rdparty/ippicv/ippicv_lnx
+-- found Intel IPP IW sources: 2017.0.3
+-- at: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/opencv/build/3rdparty/ippicv/ippiw_lnx
+-- Could not find OpenBLAS lib. Turning OpenBLAS_FOUND off
+-- Could NOT find Atlas (missing:  Atlas_CLAPACK_INCLUDE_DIR Atlas_CBLAS_LIBRARY Atlas_BLAS_LIBRARY) 
+-- A library with BLAS API found.
+-- A library with LAPACK API found.
+-- Could NOT find JNI (missing:  JAVA_AWT_LIBRARY JAVA_JVM_LIBRARY JAVA_INCLUDE_PATH JAVA_INCLUDE_PATH2 JAVA_AWT_INCLUDE_PATH) 
+-- 
+-- General configuration for OpenCV 3.4.3 =====================================
+--   Version control:               3.4.3
+-- 
+--   Platform:
+--     Timestamp:                   2019-09-05T20:38:05Z
+--     Host:                        Linux 4.15.0-20-generic x86_64
+--     CMake:                       3.5.1
+--     CMake generator:             Unix Makefiles
+--     CMake build tool:            /usr/bin/make
+--     Configuration:               Release
+-- 
+--   CPU/HW features:
+--     Baseline:                    SSE SSE2 SSE3
+--       requested:                 SSE3
+--     Dispatched code generation:  SSE4_1 SSE4_2 FP16 AVX AVX2 AVX512_SKX
+--       requested:                 SSE4_1 SSE4_2 AVX FP16 AVX2 AVX512_SKX
+--       SSE4_1 (3 files):          + SSSE3 SSE4_1
+--       SSE4_2 (1 files):          + SSSE3 SSE4_1 POPCNT SSE4_2
+--       FP16 (1 files):            + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 AVX
+--       AVX (3 files):             + SSSE3 SSE4_1 POPCNT SSE4_2 AVX
+--       AVX2 (7 files):            + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 FMA3 AVX AVX2
+--       AVX512_SKX (0 files):      + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 FMA3 AVX AVX2 AVX_512F AVX512_SKX
+-- 
+--   C/C++:
+--     Built as dynamic libs?:      YES
+--     C++ Compiler:                /usr/bin/c++  (ver 5.4.0)
+--     C++ flags (Release):         -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Winit-self -Wno-narrowing -Wno-delete-non-virtual-dtor -Wno-comment -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -O3 -DNDEBUG  -DNDEBUG
+--     C++ flags (Debug):           -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Winit-self -Wno-narrowing -Wno-delete-non-virtual-dtor -Wno-comment -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -g  -O0 -DDEBUG -D_DEBUG
+--     C Compiler:                  /usr/bin/cc
+--     C flags (Release):           -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Winit-self -Wno-narrowing -Wno-comment -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -O3 -DNDEBUG  -DNDEBUG
+--     C flags (Debug):             -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Winit-self -Wno-narrowing -Wno-comment -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -g  -O0 -DDEBUG -D_DEBUG
+--     Linker flags (Release):      
+--     Linker flags (Debug):        
+--     ccache:                      NO
+--     Precompiled headers:         YES
+--     Extra dependencies:          dl m pthread rt
+--     3rdparty dependencies:
+-- 
+--   OpenCV modules:
+--     To be built:                 core highgui imgcodecs imgproc java_bindings_generator ml python_bindings_generator video videoio
+--     Disabled:                    calib3d features2d flann js objdetect photo shape stitching superres videostab world
+--     Disabled by dependency:      -
+--     Unavailable:                 cudaarithm cudabgsegm cudacodec cudafeatures2d cudafilters cudaimgproc cudalegacy cudaobjdetect cudaoptflow cudastereo cudawarping cudev dnn java python2 python3 ts viz
+--     Applications:                -
+--     Documentation:               NO
+--     Non-free algorithms:         NO
+-- 
+--   GUI: 
+--     GTK+:                        NO
+-- 
+--   Media I/O: 
+--     ZLib:                        /opt/conda/lib/libz.so (ver 1.2.11)
+--     JPEG:                        /opt/conda/lib/libjpeg.so (ver 90)
+--     PNG:                         /opt/conda/lib/libpng.so (ver 1.6.36)
+--     JPEG 2000:                   /opt/conda/lib/libjasper.so (ver 2.0.14)
+--     OpenEXR:                     build (ver 1.7.1)
+--     HDR:                         YES
+--     SUNRASTER:                   YES
+--     PXM:                         YES
+-- 
+--   Video I/O:
+--     FFMPEG:                      NO
+--       avcodec:                   NO
+--       avformat:                  NO
+--       avutil:                    NO
+--       swscale:                   NO
+--       avresample:                NO
+--     libv4l/libv4l2:              NO
+--     v4l/v4l2:                    linux/videodev2.h
+-- 
+--   Parallel framework:            pthreads
+-- 
+--   Trace:                         YES (with Intel ITT)
+-- 
+--   Other third-party libraries:
+--     Intel IPP:                   2017.0.3 [2017.0.3]
+--            at:                   /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/opencv/build/3rdparty/ippicv/ippicv_lnx
+--     Intel IPP IW:                sources (2017.0.3)
+--               at:                /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/opencv/build/3rdparty/ippicv/ippiw_lnx
+--     Lapack:                      NO
+--     Eigen:                       YES (ver 3.2.92)
+--     Custom HAL:                  NO
+-- 
+--   Python (for build):            /usr/bin/python2.7
+-- 
+--   Java:                          
+--     ant:                         NO
+--     JNI:                         NO
+--     Java wrappers:               NO
+--     Java tests:                  NO
+-- 
+--   Install to:                    /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/opencv/install
+-- -----------------------------------------------------------------
+-- 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/opencv/build
+[  1%] Built target ittnotify
+[  1%] Built target gen-pkgconfig
+[  9%] Built target ippiw
+[  9%] Built target opencv_core_pch_dephelp
+[ 10%] Built target opencv_ml_pch_dephelp
+[ 10%] Built target opencv_imgproc_pch_dephelp
+[ 10%] Built target opencv_video_pch_dephelp
+[ 11%] Built target pch_Generate_opencv_imgproc
+[ 11%] Built target pch_Generate_opencv_core
+[ 12%] Built target opencv_highgui_pch_dephelp
+[ 12%] Built target pch_Generate_opencv_ml
+[ 13%] Built target opencv_imgcodecs_pch_dephelp
+[ 34%] Built target IlmImf
+[ 35%] Built target opencv_videoio_pch_dephelp
+[ 36%] Built target pch_Generate_opencv_video
+[ 36%] Built target pch_Generate_opencv_imgcodecs
+[ 37%] Built target pch_Generate_opencv_highgui
+[ 38%] Built target pch_Generate_opencv_videoio
+[ 63%] Built target opencv_core
+[ 68%] Built target opencv_ml
+[ 69%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/floodfill.cpp.o
+[ 70%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/accum.cpp.o
+[ 70%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/contours.cpp.o
+[ 70%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/approx.cpp.o
+[ 71%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/filter.cpp.o
+[ 72%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/connectedcomponents.cpp.o
+[ 72%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/smooth.cpp.o
+[ 72%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/imgwarp.cpp.o
+[ 72%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/matchcontours.cpp.o
+[ 73%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/templmatch.cpp.o
+[ 73%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color.cpp.o
+[ 73%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/resize.cpp.o
+[ 73%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/convhull.cpp.o
+[ 74%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/distransform.cpp.o
+[ 74%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/featureselect.cpp.o
+[ 74%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_rgb.cpp.o
+[ 75%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/subdivision2d.cpp.o
+[ 75%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_lab.cpp.o
+[ 75%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/canny.cpp.o
+[ 75%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/thresh.cpp.o
+[ 76%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/lsd.cpp.o
+[ 76%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_hsv.cpp.o
+[ 76%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/spatialgradient.cpp.o
+[ 77%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/emd.cpp.o
+[ 77%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/utils.cpp.o
+[ 77%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/sumpixels.cpp.o
+[ 77%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/opencl_kernels_imgproc.cpp.o
+[ 78%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/imgwarp.sse4_1.cpp.o
+[ 78%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/resize.sse4_1.cpp.o
+[ 78%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/corner.avx.cpp.o
+[ 78%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/accum.avx.cpp.o
+[ 79%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/resize.avx2.cpp.o
+[ 79%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/filter.avx2.cpp.o
+[ 79%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/undistort.avx2.cpp.o
+[ 80%] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/imgwarp.avx2.cpp.o
+[ 80%] Linking CXX shared library ../../lib/libopencv_imgproc.so
+[ 87%] Built target opencv_imgproc
+[ 87%] Processing OpenCL kernels (video)
+Scanning dependencies of target opencv_video
+[ 87%] Building CXX object modules/video/CMakeFiles/opencv_video.dir/src/lkpyramid.cpp.o
+[ 88%] Building CXX object modules/video/CMakeFiles/opencv_video.dir/src/camshift.cpp.o
+[ 88%] Building CXX object modules/video/CMakeFiles/opencv_video.dir/src/ecc.cpp.o
+[ 89%] Building CXX object modules/video/CMakeFiles/opencv_video.dir/src/optflowgf.cpp.o
+[ 89%] Building CXX object modules/video/CMakeFiles/opencv_video.dir/src/tvl1flow.cpp.o
+[ 89%] Building CXX object modules/video/CMakeFiles/opencv_video.dir/src/kalman.cpp.o
+[ 89%] Building CXX object modules/video/CMakeFiles/opencv_video.dir/src/bgfg_KNN.cpp.o
+[ 89%] Building CXX object modules/video/CMakeFiles/opencv_video.dir/src/bgfg_gaussmix2.cpp.o
+[ 89%] Building CXX object modules/video/CMakeFiles/opencv_video.dir/src/compat_video.cpp.o
+[ 90%] Building CXX object modules/video/CMakeFiles/opencv_video.dir/opencl_kernels_video.cpp.o
+Scanning dependencies of target opencv_imgcodecs
+[ 90%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/loadsave.cpp.o
+[ 90%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/utils.cpp.o
+[ 90%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_tiff.cpp.o
+[ 91%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_hdr.cpp.o
+[ 91%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_webp.cpp.o
+[ 91%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_sunras.cpp.o
+[ 91%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_bmp.cpp.o
+[ 92%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_gdal.cpp.o
+[ 92%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_exr.cpp.o
+[ 92%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_base.cpp.o
+[ 93%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_pxm.cpp.o
+[ 93%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_pam.cpp.o
+[ 93%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_jpeg.cpp.o
+[ 93%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_gdcm.cpp.o
+[ 94%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_png.cpp.o
+[ 94%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_jpeg2000.cpp.o
+[ 94%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/bitstrm.cpp.o
+[ 94%] Linking CXX shared library ../../lib/libopencv_video.so
+[ 95%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/rgbe.cpp.o
+[ 95%] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/exif.cpp.o
+[ 95%] Built target opencv_video
+[ 95%] Linking CXX shared library ../../lib/libopencv_imgcodecs.so
+[ 95%] Built target opencv_imgcodecs
+Scanning dependencies of target opencv_videoio
+[ 96%] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/videoio_registry.cpp.o
+[ 96%] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/videoio_c.cpp.o
+[ 97%] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_images.cpp.o
+[ 97%] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap.cpp.o
+[ 97%] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_mjpeg_encoder.cpp.o
+[ 97%] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/container_avi.cpp.o
+[ 98%] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_v4l.cpp.o
+[ 98%] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_mjpeg_decoder.cpp.o
+[ 98%] Linking CXX shared library ../../lib/libopencv_videoio.so
+[ 98%] Built target opencv_videoio
+Scanning dependencies of target opencv_highgui
+[100%] Building CXX object modules/highgui/CMakeFiles/opencv_highgui.dir/src/window.cpp.o
+[100%] Building CXX object modules/highgui/CMakeFiles/opencv_highgui.dir/src/roiSelector.cpp.o
+[100%] Linking CXX shared library ../../lib/libopencv_highgui.so
+[100%] Built target opencv_highgui
+[45m[1m[37mBuilding pangolin...[0m[0m[0m
+Already up-to-date.
+Already up-to-date.
+Build type not set (defaults to release)
+-DCMAKE_BUILD_TYPE=Debug for debug
+-- Found GLEW: /usr/lib/x86_64-linux-gnu/libGLEW.so
+-- Could NOT find WAYLAND_CLIENT (missing:  WAYLAND_CLIENT_LIBRARIES WAYLAND_CLIENT_INCLUDE_DIR) 
+-- Could NOT find WAYLAND_SERVER (missing:  WAYLAND_SERVER_LIBRARIES WAYLAND_SERVER_INCLUDE_DIR) 
+-- Could NOT find WAYLAND_EGL (missing:  WAYLAND_EGL_LIBRARIES WAYLAND_EGL_INCLUDE_DIR) 
+-- Could NOT find WAYLAND_CURSOR (missing:  WAYLAND_CURSOR_LIBRARIES WAYLAND_CURSOR_INCLUDE_DIR) 
+-- Could NOT find WAYLAND (missing:  WAYLAND_LIBRARIES WAYLAND_INCLUDE_DIR) 
+-- Eigen Found and Enabled
+-- V4L Found and Enabled
+-- OpenNI2 Found and Enabled
+-- libpng Found and Enabled
+-- libjpeg Found and Enabled
+-- libtiff Found and Enabled
+-- Could NOT find Doxygen (missing:  DOXYGEN_EXECUTABLE) 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/Pangolin/build
+Scanning dependencies of target pangolin
+[  1%] Building CXX object src/CMakeFiles/pangolin.dir/display/display.cpp.o
+[  2%] Building CXX object src/CMakeFiles/pangolin.dir/fonts.cpp.o
+[  3%] Building CXX object src/CMakeFiles/pangolin.dir/video/video.cpp.o
+[  4%] Linking CXX shared library libpangolin.so
+[ 71%] Built target pangolin
+[ 73%] Linking CXX executable VideoConvert
+[ 73%] Linking CXX executable VideoJsonPrint
+[ 74%] Linking CXX executable Plotter
+[ 75%] Linking CXX executable VideoViewer
+[ 76%] Linking CXX executable HelloPangolin
+[ 77%] Linking CXX executable VideoJsonTransform
+[ 78%] Linking CXX executable ModelViewer
+[ 79%] Linking CXX executable HelloPangolinOffscreen
+[ 79%] Built target Plotter
+[ 79%] Built target HelloPangolin
+[ 79%] Built target VideoViewer
+[ 80%] Built target VideoConvert
+[ 81%] Built target VideoJsonTransform
+[ 82%] Built target VideoJsonPrint
+[ 83%] Linking CXX executable HelloPangolinThreads
+[ 84%] Linking CXX executable SimpleMultiDisplay
+[ 85%] Linking CXX executable SimpleScene
+[ 86%] Linking CXX executable SimpleDisplayImage
+[ 87%] Built target ModelViewer
+[ 88%] Built target HelloPangolinOffscreen
+[ 89%] Linking CXX executable SimplePlot
+[ 90%] Linking CXX executable SimpleDisplay
+[ 91%] Linking CXX executable SimpleVideo
+[ 92%] Linking CXX executable SimpleRecord
+[ 93%] Built target HelloPangolinThreads
+[ 94%] Built target SimpleDisplayImage
+[ 95%] Built target SimpleScene
+[ 96%] Built target SimplePlot
+[ 96%] Built target SimpleMultiDisplay
+[ 97%] Linking CXX executable SharedMemoryCamera
+[ 97%] Built target SimpleVideo
+[ 98%] Built target SimpleRecord
+[ 99%] Built target SimpleDisplay
+[100%] Built target SharedMemoryCamera
+[45m[1m[37mBuilding openni2...[0m[0m[0m
+Already up-to-date.
+Already up-to-date.
+make -C ThirdParty/PSCommon/XnLib/Source
+make -C Source/DepthUtils
+make -C Wrappers/java/OpenNI.java
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/DepthUtils'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Wrappers/java/OpenNI.java'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/ThirdParty/PSCommon/XnLib/Source'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Wrappers/java/OpenNI.java'
+make -C Samples/SimpleViewer.java
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/SimpleViewer.java'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/DepthUtils'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/SimpleViewer.java'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/ThirdParty/PSCommon/XnLib/Source'
+make -C Source/Core
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Core'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Core'
+make -C Source/Drivers/DummyDevice
+make -C Source/Drivers/PS1080
+make -C Source/Drivers/PSLink
+make -C Source/Drivers/OniFile
+make -C Wrappers/java/OpenNI.jni
+make -C Source/Drivers/PS1080/PS1080Console
+make -C Source/Drivers/PSLink/PSLinkConsole
+make -C Source/Tools/NiViewer
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/DummyDevice'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/OniFile'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/PS1080'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/PSLink'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Tools/NiViewer'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/PSLink/PSLinkConsole'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Wrappers/java/OpenNI.jni'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/PS1080/PS1080Console'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/DummyDevice'
+make -C Samples/SimpleRead
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/SimpleRead'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Tools/NiViewer'
+make -C Samples/EventBasedRead
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/EventBasedRead'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/SimpleRead'
+make -C Samples/MultipleStreamRead
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/MultipleStreamRead'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/EventBasedRead'
+make[1]: Nothing to be done for 'all'.
+make -C Samples/MWClosestPoint
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/PS1080/PS1080Console'
+make -C Samples/SimpleViewer
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/MWClosestPoint'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/SimpleViewer'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Wrappers/java/OpenNI.jni'
+make -C Samples/MultiDepthViewer
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/MultiDepthViewer'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/MultipleStreamRead'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/SimpleViewer'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/MWClosestPoint'
+make -C Samples/MWClosestPointApp
+make -C Samples/ClosestPointViewer
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/MWClosestPointApp'
+make[1]: Entering directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/ClosestPointViewer'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/MultiDepthViewer'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/MWClosestPointApp'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Samples/ClosestPointViewer'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/OniFile'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/PSLink/PSLinkConsole'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/PSLink'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Source/Drivers/PS1080'
+[45m[1m[37mBuilding freetype-gl-cpp...[0m[0m[0m
+Already up-to-date.
+-- Building for Linux target system
+-- Building with GNU compiler
+-- 
+-- The following OPTIONAL packages have been found:
+
+ * Eigen3
+ * PkgConfig
+ * FontConfig
+
+-- The following REQUIRED packages have been found:
+
+ * OpenGL
+ * Freetype
+ * GLEW
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/build
+[ 80%] Built target freetype-gl
+Scanning dependencies of target freetype-gl-cpp
+[ 86%] Building CXX object CMakeFiles/freetype-gl-cpp.dir/freetype-gl-cpp.cpp.o
+[ 93%] Linking CXX shared library libfreetype-gl-cpp.so
+[100%] Built target freetype-gl-cpp
+[ 80%] Built target freetype-gl
+[100%] Built target freetype-gl-cpp
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/lib/freetype-gl-cpp/libfreetype-gl-cpp.so
+-- Set runtime path of "/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/lib/freetype-gl-cpp/libfreetype-gl-cpp.so" to ""
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/vertex-buffer.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/text-buffer.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/vec234.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/distance-field.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/utf8-utils.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/edtaa3func.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/opengl.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/texture-font.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/platform.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/markup.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/font-manager.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/vector.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/texture-atlas.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/vertex-attribute.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/freetype-gl.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/demos/mat4.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/demos/screenshot-util.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl/demos/shader.h
+-- Installing: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/generated/text.vert
+-- Installing: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/generated/text.frag
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/include/freetype-gl-cpp/freetype-gl-cpp.h
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/share/cmake/freetype-gl-cpp/freetype-gl-cppConfig.cmake
+-- Up-to-date: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/freetype-gl-cpp/install/share/cmake/freetype-gl-cpp/ConfigVersion.cmake
+[45m[1m[37mBuilding densecrf...[0m[0m[0m
+Already up-to-date.
+Already up-to-date.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/densecrf/build
+[ 16%] Built target lbfgs
+[ 83%] Built target densecrf
+[100%] Built target optimization
+[45m[1m[37mBuilding gslicr...[0m[0m[0m
+Already up-to-date.
+Already up-to-date.
+-- Found OpenCV: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/opencv/build (found version "3.4.3") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/gSLICr/build
+[ 25%] Built target ORUtils
+[ 75%] Built target gSLICr_lib
+Scanning dependencies of target demo
+[ 87%] Building CXX object CMakeFiles/demo.dir/demo.cpp.o
+[100%] Linking CXX executable demo
+[100%] Built target demo
+[45m[1m[37mBuilding toml11...[0m[0m[0m
+Already up-to-date.
+[45m[1m[37mBuilding MaskFusion...[0m[0m[0m
+ln: failed to create symbolic link './Mask_RCNN': File exists
+-- Boost version: 1.62.0
+Boost_INCLUDE_DIRS: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/boost/include
+Pangolin_INCLUDE_DIRS: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/Pangolin/include;/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/Pangolin/build/src/include;/usr/include;/usr/include;/usr/include;/usr/include/eigen3
+Evaluating Core/CMAKE
+-- Found SuiteSparse
+-- Found OpenCV: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/opencv/build (found suitable version "3.4.3", minimum required is "3.1") 
+Using: 
+=======
+Using DENSECRF_DIR: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/densecrf
+Using maskfusion_SHADER_DIR: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/Shaders
+Using python:  3.5.2 
+Using PYTHON_LIBRARIES:  /usr/lib/x86_64-linux-gnu/libpython3.5m.so 
+Using PYTHON_INCLUDE_DIRS:  /usr/include/python3.5m 
+=======
+-- CUDA NVCC target flags: -gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_61,code=sm_61
+Release build.
+Evaluating GUI/CMAKE
+-- Boost version: 1.62.0
+Include-directories: 
+ZLIB_INCLUDE_DIR: /opt/conda/include
+EIGEN_INCLUDE_DIRS: 
+CUDA_INCLUDE_DIRS: /usr/local/cuda/include
+OPENNI2_INCLUDE_DIR: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/deps/OpenNI2/Include
+CMAKE_CURRENT_SOURCE_DIR/../Core: 
+Release build.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/build
+Scanning dependencies of target MaskFusionTools
+[  2%] Building CXX object GUI/CMakeFiles/MaskFusionTools.dir/Tools/FreenectLiveReader.cpp.o
+[  6%] Building CXX object GUI/CMakeFiles/MaskFusionTools.dir/Tools/OpenNI2LiveReader.cpp.o
+[  6%] Building CXX object GUI/CMakeFiles/MaskFusionTools.dir/Tools/RealsenseLiveReader.cpp.o
+[  8%] Building CXX object GUI/CMakeFiles/MaskFusionTools.dir/Tools/PangolinReader.cpp.o
+[ 10%] Building CXX object GUI/CMakeFiles/MaskFusionTools.dir/Tools/KlgLogReader.cpp.o
+[ 12%] Building CXX object GUI/CMakeFiles/MaskFusionTools.dir/Tools/ImageLogReader.cpp.o
+Scanning dependencies of target libmaskfusion
+[ 14%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Ferns.cpp.o
+[ 16%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/MaskFusion.cpp.o
+[ 18%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/GPUTexture.cpp.o
+[ 20%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/FrameData.cpp.o
+[ 22%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Model/ModelProjection.cpp.o
+[ 24%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Model/Model.cpp.o
+[ 26%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Model/Deformation.cpp.o
+In file included from /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/GPUTexture.cpp:22:0:
+/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/GPUTexture.cpp: In member function 'cv::Mat GPUTexture::downloadTexture()':
+/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/Utils/OpenGLErrorHandling.h:6:58: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+ #define checkGLErrors() checkGLErrors_(__FILE__, __LINE__)
+                                                          ^
+/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/GPUTexture.cpp:146:5: note: in expansion of macro 'checkGLErrors'
+     checkGLErrors();
+     ^
+/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/GPUTexture.cpp: In member function 'void GPUTexture::downloadTexture(unsigned char*)':
+/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/Utils/OpenGLErrorHandling.h:6:58: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+ #define checkGLErrors() checkGLErrors_(__FILE__, __LINE__)
+                                                          ^
+/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/GPUTexture.cpp:155:5: note: in expansion of macro 'checkGLErrors'
+     checkGLErrors();
+     ^
+[ 28%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Model/GlobalProjection.cpp.o
+[ 30%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Utils/CholeskyDecomp.cpp.o
+[ 32%] Linking CXX shared library libMaskFusionTools.so
+[ 34%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Utils/RGBDOdometry.cpp.o
+[ 38%] Built target MaskFusionTools
+[ 40%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Utils/Parse.cpp.o
+[ 42%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Utils/DeformationGraph.cpp.o
+[ 44%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Utils/Gnuplot.cpp.o
+In file included from /ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/Model/GlobalProjection.cpp:25:0:
+/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/Model/GlobalProjection.cpp: In member function 'void GlobalProjection::project(const std::__cxx11::list<std::shared_ptr<Model> >&, int, int, int, float)':
+/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/Utils/OpenGLErrorHandling.h:6:58: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+ #define checkGLErrors() checkGLErrors_(__FILE__, __LINE__)
+                                                          ^
+/ysmedia/sync/mycode/dev-project/maskfusion/maskfusion/Core/Model/GlobalProjection.cpp:106:5: note: in expansion of macro 'checkGLErrors'
+     checkGLErrors();
+     ^
+[ 46%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Shaders/FeedbackBuffer.cpp.o
+[ 48%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Shaders/Resize.cpp.o
+[ 51%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Shaders/Vertex.cpp.o
+[ 53%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Shaders/FillIn.cpp.o
+[ 55%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Shaders/ComputePack.cpp.o
+[ 57%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Cuda/containers/device_memory.cpp.o
+[ 59%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Segmentation/CfSegmentation.cpp.o
+[ 61%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Segmentation/Slic.cpp.o
+[ 63%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Segmentation/PreSegmentation.cpp.o
+[ 65%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Segmentation/MfSegmentation.cpp.o
+[ 67%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Segmentation/Segmentation.cpp.o
+[ 69%] Building CXX object Core/CMakeFiles/libmaskfusion.dir/Segmentation/MaskRCNN/MaskRCNN.cpp.o
+[ 71%] Linking CXX shared library liblibmaskfusion.so
+[ 77%] Built target libmaskfusion
+Scanning dependencies of target MaskFusion
+[ 79%] Building CXX object GUI/CMakeFiles/MaskFusion.dir/Main.cpp.o
+[ 81%] Building CXX object GUI/CMakeFiles/MaskFusion.dir/MainController.cpp.o
+[ 83%] Building CXX object GUI/CMakeFiles/MaskFusion.dir/Tools/RealsenseLiveReader.cpp.o
+[ 85%] Building CXX object GUI/CMakeFiles/MaskFusion.dir/Tools/PangolinReader.cpp.o
+[ 87%] Building CXX object GUI/CMakeFiles/MaskFusion.dir/Tools/KlgLogReader.cpp.o
+[ 89%] Building CXX object GUI/CMakeFiles/MaskFusion.dir/Tools/FreenectLiveReader.cpp.o
+[ 91%] Building CXX object GUI/CMakeFiles/MaskFusion.dir/Tools/OpenNI2LiveReader.cpp.o
+[ 93%] Building CXX object GUI/CMakeFiles/MaskFusion.dir/Tools/ImageLogReader.cpp.o
+[ 95%] Linking CXX executable MaskFusion
+/usr/bin/ld: warning: libjpeg.so.9, needed by ../../deps/Pangolin/build/src/libpangolin.so, may conflict with libjpeg.so.8
+[100%] Built target MaskFusion

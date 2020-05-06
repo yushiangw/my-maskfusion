@@ -66,9 +66,10 @@ MODEL_DIR = os.path.join(DATA_DIR, "logs")
 model_path = os.path.join(DATA_DIR, "mask_rcnn_coco.h5")
 
 filter_classes = []
-if args.filter:
-    filter_classes = args.filter
-    filter_classes = [f.replace("_", " ") for f in filter_classes]
+#iif args.filter:
+#    filter_classes = args.filter
+#    filter_classes = [f.replace("_", " ") for f in filter_classes]
+
 class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                'bus', 'train', 'truck', 'boat', 'traffic light',
                'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
@@ -84,6 +85,8 @@ class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
                'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
                'teddy bear', 'hair drier', 'toothbrush']
+
+filter_classes = class_names.copy()[1:]
 
 if args.c:
     with open(args.c, 'rb') as toml_file:

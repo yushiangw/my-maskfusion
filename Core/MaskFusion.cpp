@@ -16,10 +16,12 @@
  *
  */
 
+// #define EXPORT_GLOBAL_PLY
+
 #include "MaskFusion.h"
 #include <thread>
 
-//#define LOG_TICKS
+#define LOG_TICKS
 
 MaskFusion::MaskFusion(int timeDelta, int countThresh, float errThresh, float covThresh, bool closeLoops,
                    bool iclnuim, bool reloc, float photoThresh, float initConfidenceGlobal,
@@ -744,8 +746,13 @@ void MaskFusion::savePly() {
 
         Model::SurfelMap surfelMap = model->downloadMap();
         surfelMap.countValid(model->getConfidenceThreshold());
-
         std::cout << "Extarcted " << surfelMap.numValid << " out of " << surfelMap.numPoints << " points." << std::endl;
+
+
+        std::string filename2 = exportDir + "cloud-" + std::to_string(model->getID()) + "_vis.obj";
+        std::ofstream fobj_out(filename2.c_str());
+        fobj_out << "# "  << surfelMap.numValid << "\n";
+
 
         // Write header
         fs << "ply";
@@ -783,6 +790,7 @@ void MaskFusion::savePly() {
         Eigen::Matrix4f gP = globalModel->getPose();
         Eigen::Matrix4f Tp = gP * model->getPose().inverse();
         Eigen::Matrix4f Tn = Tn.inverse().transpose();
+        Eigen::Matrix3f Tn33 = Tp.topRightCorner(3,3);
 #endif
 
         for (unsigned int i = 0; i < surfelMap.numPoints; i++) {
@@ -796,9 +804,10 @@ void MaskFusion::savePly() {
                 center += pos;
                 float radius = nor[3];
                 nor[3] = 0;
+                
 #ifdef EXPORT_GLOBAL_PLY
                 pos = Tp * pos;
-                nor = Tn * nor;
+                nor.head(3)= Tn33 * nor.head(3);
 #endif
 
                 nor[0] *= -1;
@@ -834,6 +843,20 @@ void MaskFusion::savePly() {
 
                 memcpy(&value, &radius, sizeof(float));
                 fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
+
+
+                fobj_out <<"v " 
+                         << pos[0] << " " 
+                         << pos[1] << " " 
+                         << pos[2] << " " 
+                         << int(r) << " "
+                         << int(g) << " "
+                         << int(b) << " "
+                         << nor[0] << " "
+                         << nor[1] << " "
+                         << nor[2] << " "
+                         << radius << " "
+                         << "\n";
             }
         }
 
@@ -842,6 +865,7 @@ void MaskFusion::savePly() {
 
         // Close file
         fs.close();
+        fobj_out.close();
     };
 
     for (auto& m : models) exportModelPLY(m);
@@ -862,7 +886,7 @@ void MaskFusion::exportPoses() {
             auto poseLog = m->getPoseLog();
             for (auto& p : poseLog) {
 #ifdef LOG_TICKS
-                fs << p.ts;
+                fs << p.ts-1;
 #else
                 fs << double(p.ts) * 1e-6;
 #endif

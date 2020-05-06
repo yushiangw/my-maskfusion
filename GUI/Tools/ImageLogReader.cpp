@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
+
 #include "ImageLogReader.h"
 
 #include <opencv2/highgui/highgui.hpp>
@@ -129,7 +130,7 @@ ImageLogReader::ImageLogReader(std::string colorDirectory, std::string depthDire
 
   // Find start index
   int index = 0;
-  for (; index < 2; index++) {
+  for (; index < 999; index++) {
     std::stringstream ss;
     ss << std::setw(indexW) << std::setfill('0') << index;
     std::string path = colorDirectory + colorPre + ss.str() + colorExt;
@@ -137,8 +138,10 @@ ImageLogReader::ImageLogReader(std::string colorDirectory, std::string depthDire
       startIndex = index;
       break;
     }
+    std::cout<<"path="<<path<<std::endl;
   }
-  if (index == 2) throw std::invalid_argument("Error: Could not find start index.");
+  std::cout<<"stsartIndex="<<index<<std::endl;
+  if (index == 999) throw std::invalid_argument("Error: Could not find start index.");
 
   std::cout << "Opened dataset with " << numFrames << " frames, starting with index: " << startIndex;
   if (hasMasksGT) std::cout << " The dataset also provides masks.";

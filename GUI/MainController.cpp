@@ -137,6 +137,7 @@ MainController::MainController(int argc, char* argv[])
     bool logReaderReady = false;
 
     Parse::get().arg(argc, argv, "-l", logFile);
+    
     if (logFile.length()) {
         if (boost::filesystem::exists(logFile) && boost::algorithm::ends_with(logFile, ".klg")) {
             logReader = std::make_unique<KlgLogReader>(logFile, Parse::get().arg(argc, argv, "-f", tmpString) > -1);
@@ -144,10 +145,15 @@ MainController::MainController(int argc, char* argv[])
             logReader = std::make_unique<PangolinReader>(logFile, Parse::get().arg(argc, argv, "-f", tmpString) > -1);
         }
         logReaderReady = true;
+    }else{
+        
     }
 
     if (!logReaderReady) {
+        std::cout<<"-dir mode\n";
+        
         Parse::get().arg(argc, argv, "-dir", logFile);
+        
         if (logFile.length()) {
             logFile += '/';  // "colorDir"
             std::string depthDir, maskDir, depthPrefix, colorPrefix, maskPrefix;
@@ -156,6 +162,13 @@ MainController::MainController(int argc, char* argv[])
             Parse::get().arg(argc, argv, "-colorprefix", colorPrefix);
             Parse::get().arg(argc, argv, "-depthprefix", depthPrefix);
             Parse::get().arg(argc, argv, "-maskprefix", maskPrefix);
+            
+            std::cout << "depthdir=" << depthDir<<"\n";
+            std::cout << "maskdir="  << maskDir<<"\n" ;
+            std::cout << "colorPrefix=" << colorPrefix<<"\n";
+            std::cout << "depthPrefix=" << depthPrefix<<"\n";
+            std::cout << "maskPrefix =" << maskPrefix<<"\n" ;
+            
             if (depthDir.length()) depthDir += '/';
             //else depthDir = logFile;
             if (maskDir.length()) maskDir += '/';
