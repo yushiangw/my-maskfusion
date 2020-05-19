@@ -341,7 +341,7 @@ class GUI {
   void addMultiModelParameters(){
       enableMultiModel = new pangolin::Var<bool>("oi.Enable multiple models", true, true);
       enableSmartDelete = new pangolin::Var<bool>("oi.Delete deactivated", true, true);
-      enableTrackAll = new pangolin::Var<bool>("oi.Track all models", false, true);
+      enableTrackAll = new pangolin::Var<bool>("oi.Track all models", true, true);
       minRelSizeNew = new pangolin::Var<float>("oi.Min-size new", 0.015, 0, 0.5);
       maxRelSizeNew = new pangolin::Var<float>("oi.Max-size new", 0.4, 0.3, 1);
       modelSpawnOffset = new pangolin::Var<unsigned>("oi.Model spawn offset", 22, 0, 100);
