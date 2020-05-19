@@ -1,7 +1,0 @@
-
-cd /ysmedia/mycode/maskfusion/build_green/GUI
-
-
-./MaskFusion  -basedir  /ysmedia/mydata/real_data_small/raw_maskfusion/input/2020_0309_9_short -maskdir masks/ -depthdir depths/  -colordir colors/ -depthprefix Depth -colorprefix Color -cal calibration.txt -exportdir  maskfuion_res -keep  -d 6 -dir .    
-
-./MaskFusion  -basedir  /ysmedia/mydata/real_data_small/raw_maskfusion/input/2020_0309_10_short2 -maskdir masks/ -depthdir depths/  -colordir colors/ -depthprefix Depth -colorprefix Color -cal calibration.txt -exportdir  maskfuion_res -keep -d 6 -dir .  
