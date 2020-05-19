@@ -1,27 +1,15 @@
 
 
+rm Core/Segmentation/MaskRCNN/numpy
 ln -s `python3 -c "import numpy as np; print(np.__path__[0])"`/core/include/numpy Core/Segmentation/MaskRCNN || true # Provide numpy headers to C++
 
-
 cd deps
-
-function git_clone(){
-  repo_dir=`basename "$1" .git`
-  git -C "$repo_dir" pull 2> /dev/null || eval "$1"
-}
-
-# Enable colors
-source deps/bashcolors/bash_colors.sh
-function highlight(){
-  echo "$1"
-}
-
-
 
 
 # build pangolin
 highlight "Building pangolin..."
-git_clone "git clone --depth=1 https://github.com/stevenlovegrove/Pangolin.git"
+#git_clone "git clone --depth=1 https://github.com/stevenlovegrove/Pangolin.git"
+git clone --depth=1 https://github.com/stevenlovegrove/Pangolin.git
 cd Pangolin
 git pull
 mkdir -p build
@@ -33,7 +21,8 @@ echo Pangolin_DIR=$(pwd) > path_setting.txt
 cd ../..
 
 
-git_clone "git clone --branch 3.4.1 --depth=1 https://github.com/opencv/opencv.git"
+# git_clone "git clone --branch 3.4.1 --depth=1 https://github.com/opencv/opencv.git"
+git clone --branch 3.4.1 --depth=1 https://github.com/opencv/opencv.git
 cd opencv
 mkdir -p build
 cd build
@@ -82,8 +71,9 @@ OpenCV_DIR=$(pwd)
 cd ../..
 
 # build OpenNI2
-highlight "Building openni2..."
-git_clone "git clone --depth=1 https://github.com/occipital/OpenNI2.git"
+# highlight "Building openni2..."
+# git_clone "git clone --depth=1 https://github.com/occipital/OpenNI2.git"
+git clone --depth=1 https://github.com/occipital/OpenNI2.git
 cd OpenNI2
 git pull
 make -j8
@@ -92,8 +82,9 @@ cd ..
 
 
 # build freetype-gl-cpp
-highlight "Building freetype-gl-cpp..."
-git_clone "git clone --depth=1 --recurse-submodules https://github.com/martinruenz/freetype-gl-cpp.git"
+# highlight "Building freetype-gl-cpp..."
+# git_clone "git clone --depth=1 --recurse-submodules https://github.com/martinruenz/freetype-gl-cpp.git"
+git clone --depth=1 --recurse-submodules https://github.com/martinruenz/freetype-gl-cpp.git
 cd freetype-gl-cpp
 mkdir -p build
 cd build
@@ -105,8 +96,9 @@ cd ../..
 
 
 # build DenseCRF, see: http://graphics.stanford.edu/projects/drf/
-highlight "Building densecrf..."
-git_clone "git clone --depth=1 https://github.com/martinruenz/densecrf.git"
+# highlight "Building densecrf..."
+#git_clone "git clone --depth=1 https://github.com/martinruenz/densecrf.git"
+git clone --depth=1 https://github.com/martinruenz/densecrf.git
 cd densecrf
 git pull
 mkdir -p build
@@ -121,8 +113,9 @@ cd ../..
 
 
 # build gSLICr, see: http://www.robots.ox.ac.uk/~victor/gslicr/
-highlight "Building gslicr..."
-git_clone "git clone --depth=1 https://github.com/carlren/gSLICr.git"
+# highlight "Building gslicr..."
+# git_clone "git clone --depth=1 https://github.com/carlren/gSLICr.git"
+git clone --depth=1 https://github.com/carlren/gSLICr.git
 cd gSLICr
 git pull
 mkdir -p build
@@ -152,8 +145,9 @@ cd ../..
 # cd ../..
 
 # c++ toml
-highlight "Building toml11..."
+echo "Building toml11..."
 #git_clone "git clone --depth=1 https://github.com/ToruNiina/toml11.git"
-git_clone "git clone --depth=1 --branch v2.4.0 https://github.com/ToruNiina/toml11.git"
+# git_clone "git clone --depth=1 --branch v2.4.0 https://github.com/ToruNiina/toml11.git"
+git clone --depth=1 --branch v2.4.0 https://github.com/ToruNiina/toml11.git
 
 cd ..
