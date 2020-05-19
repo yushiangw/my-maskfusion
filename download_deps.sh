@@ -5,7 +5,6 @@ ln -s `python3 -c "import numpy as np; print(np.__path__[0])"`/core/include/nump
 
 cd deps
 
-
 # build pangolin
 highlight "Building pangolin..."
 #git_clone "git clone --depth=1 https://github.com/stevenlovegrove/Pangolin.git"

@@ -39,14 +39,15 @@ RUN pip3 install imgaug
 RUN pip3 install opencv-python
 RUN pip3 install pytoml
 
-RUN mkdir /maskfusion_prebuild 
+RUN mkdir /maskfusion_prebuild   
+RUN echo '123'
 RUN git clone https://github.com/yushiangw/my-maskfusion.git  /maskfusion_prebuild/mymaskfusion
 RUN cd /maskfusion_prebuild/mymaskfusion
 RUN ls
 RUN chmod u+x /maskfusion_prebuild/mymaskfusion/download_deps.sh
-RUN cd /maskfusion_prebuild/mymaskfusion ; /maskfusion_prebuild/mymaskfusion/download_deps.sh
+RUN cd /maskfusion_prebuild/mymaskfusion ;  /maskfusion_prebuild/mymaskfusion/download_deps.sh
 
-RUN chmod 
+RUN sudo chown -R /maskfusion_prebuild/mymaskfusion
 
 # create a non-root user
 ARG USER_ID=14510
