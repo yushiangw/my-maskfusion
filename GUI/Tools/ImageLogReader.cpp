@@ -123,6 +123,11 @@ ImageLogReader::ImageLogReader(std::string colorDirectory, std::string depthDire
     maxMasks = numMaskImages;
   }
 
+  std::cout
+    <<"numColorImages ="<<numColorImages<<"\n"
+    <<"numDepthImages ="<<numDepthImages<<"\n"
+    <<"numMaskImages  ="<<numMaskImages<<"\n";
+
   if (numColorImages != numDepthImages) throw std::invalid_argument("Error: Number of RGB-frames != Depth-frames!");
   if (hasMasksGT && (numColorImages != numMaskImages)) throw std::invalid_argument("Error: Number of RGB-frames != Mask-frames!");
 
@@ -246,13 +251,19 @@ FrameDataPointer ImageLogReader::loadFrameFromDrive(const size_t& index) {
 
 
   // Load RGB
+  std::cout<<"rgbImagePath="<<rgbImagePath<<"\n";
   result->rgb = cv::imread(rgbImagePath);
   if (result->rgb.total() == 0) throw std::invalid_argument("Could not read rgb-image file.");
   result->flipColors();
 
   // Load Depth
+  std::cout<<"depthImagePath="<<depthImagePath<<"\n";
   result->depth = cv::imread(depthImagePath, cv::IMREAD_UNCHANGED);
-  if (result->depth.total() == 0) throw std::invalid_argument("Could not read depth-image file. (Empty)");
+  if (result->depth.total() == 0){
+    std::cout<<"depthImagePath="<<depthImagePath<<'\n';
+    throw std::invalid_argument("Could not read depth-image file. (Empty)");
+  }
+
   if (result->depth.type() != CV_32FC1) {
     cv::Mat newDepth(result->depth.rows, result->depth.cols, CV_32FC1);
     if (result->depth.type() == CV_32FC3) {

@@ -1,0 +1,47 @@
+#FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu16.04
+FROM nvidia/cudagl:10.2-devel-ubuntu16.04
+
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update && apt-get install -y \
+	python3 \
+	python3-pip \
+	ca-certificates python3-dev git wget sudo vim x11-apps
+
+RUN apt-get install -y \
+    software-properties-common \
+    build-essential \
+    cmake \
+    freeglut3-dev \
+    git \
+    g++ \
+    gcc \
+    libeigen3-dev \
+    libglew-dev \
+    libjpeg-dev \
+    libsuitesparse-dev \
+    libudev-dev \
+    libusb-1.0-0-dev \
+    openjdk-8-jdk \
+    unzip \
+    zlib1g-dev \
+    cython3 \
+    libboost-all-dev \
+    libfreetype6-dev
+
+RUN pip3 install pip --upgrade
+RUN pip3 install tensorflow-gpu==1.8.0
+RUN pip3 install scikit-image
+RUN pip3 install keras
+RUN pip3 install IPython
+RUN pip3 install h5py
+RUN pip3 install cython
+RUN pip3 install imgaug
+RUN pip3 install opencv-python
+RUN pip3 install pytoml
+
+# create a non-root user
+ARG USER_ID=14510
+RUN useradd -m --no-log-init --system  --uid ${USER_ID} mkappuser -g sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER mkappuser
+
