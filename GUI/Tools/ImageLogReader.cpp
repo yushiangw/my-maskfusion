@@ -251,16 +251,16 @@ FrameDataPointer ImageLogReader::loadFrameFromDrive(const size_t& index) {
 
 
   // Load RGB
-  std::cout<<"rgbImagePath="<<rgbImagePath<<"\n";
+  //std::cout<<"rgbImagePath="<<rgbImagePath<<"\n";
   result->rgb = cv::imread(rgbImagePath);
   if (result->rgb.total() == 0) throw std::invalid_argument("Could not read rgb-image file.");
   result->flipColors();
 
   // Load Depth
-  std::cout<<"depthImagePath="<<depthImagePath<<"\n";
+  //std::cout<<"depthImagePath="<<depthImagePath<<"\n";
   result->depth = cv::imread(depthImagePath, cv::IMREAD_UNCHANGED);
   if (result->depth.total() == 0){
-    std::cout<<"depthImagePath="<<depthImagePath<<'\n';
+    //std::cout<<"depthImagePath="<<depthImagePath<<'\n';
     throw std::invalid_argument("Could not read depth-image file. (Empty)");
   }
 

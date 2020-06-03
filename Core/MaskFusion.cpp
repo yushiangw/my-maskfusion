@@ -261,7 +261,9 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
             for(++itr;itr!=models.end();itr++){
                 ModelPointer& mp = (*itr);
                 bool trackable = trackableClassIds.empty() || trackableClassIds.count(mp->getClassID());
-
+                if(!trackableClassIds.empty()){
+                  std::cout<<"*Err, trackableClassIds is non-empty"<<std::endl;
+                }
                 if(((*itr)->isNonstatic() || trackAllModels) && trackable){
                     Eigen::Matrix4f t = (*itr)->performTracking(frameToFrameRGB, rgbOnly, icpWeight, pyramid, fastOdom, so3, maxDepthProcessed, textureRGB.get(),
                                                                 frame->timestamp, requiresFillIn(*itr));
@@ -272,6 +274,7 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
                         std::cout << "Removing model due to movement." << std::endl;
                         itr = inactivateModel(itr);
                     }
+                    
                 } else {
                     mp->updateStaticPose(globalModel->getPose()); // cam->cam_0=object_0 (cam_0->object_0 = identity)
                 }

@@ -30,4 +30,5 @@ filter_classes = []
 trackable_classes = []
 
 # Reject predictions with lower score
-score_threshold = 0.55
+#score_threshold = 0.55
+score_threshold = 0.10

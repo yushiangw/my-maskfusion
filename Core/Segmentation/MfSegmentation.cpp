@@ -27,6 +27,8 @@
 #include <algorithm>
 
 #define SHOW_DEBUG_VISUALISATION
+
+
 //#define WRITE_MASK_FILES
 #ifdef WRITE_MASK_FILES
     int WRITE_MASK_INDEX = 0;

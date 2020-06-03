@@ -293,6 +293,7 @@ MainController::MainController(int argc, char* argv[])
         trackableClasses = toml::get<std::vector<std::string>>(tomlMaskRCNN.at("trackable_classes"));
 
         for(std::string& c : trackableClasses){
+            std::cout<<"trackableClasses="<<c<<std::endl;
             trackableClassIds.insert(std::distance(classNames.begin(), std::find(classNames.begin(), classNames.end(), c)));
         }
     } catch(...){
