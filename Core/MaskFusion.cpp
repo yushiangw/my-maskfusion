@@ -786,12 +786,13 @@ void MaskFusion::savePly() {
 
         Eigen::Vector4f center(0, 0, 0, 0);
 
-#ifdef EXPORT_GLOBAL_PLY
-        Eigen::Matrix4f gP = globalModel->getPose();
-        Eigen::Matrix4f Tp = gP * model->getPose().inverse();
-        Eigen::Matrix4f Tn = Tn.inverse().transpose();
-        Eigen::Matrix3f Tn33 = Tp.topRightCorner(3,3);
-#endif
+// do not use
+// #ifdef EXPORT_GLOBAL_PLY
+//         Eigen::Matrix4f gP = globalModel->getPose();
+//         Eigen::Matrix4f Tp = gP * model->getPose().inverse();
+//         Eigen::Matrix4f Tn = Tn.inverse().transpose();
+//         Eigen::Matrix3f Tn33 = Tp.topRightCorner(3,3);
+// #endif
 
         for (unsigned int i = 0; i < surfelMap.numPoints; i++) {
             Eigen::Vector4f pos = (*surfelMap.data)[(i * 3) + 0];
@@ -805,11 +806,10 @@ void MaskFusion::savePly() {
                 float radius = nor[3];
                 nor[3] = 0;
                 
-#ifdef EXPORT_GLOBAL_PLY
-                pos = Tp * pos;
-                nor.head(3)= Tn33 * nor.head(3);
-#endif
-
+// #ifdef EXPORT_GLOBAL_PLY
+//                 pos = Tp * pos;
+//                 nor.head(3)= Tn33 * nor.head(3);
+// #endif
                 nor[0] *= -1;
                 nor[1] *= -1;
                 nor[2] *= -1;
@@ -843,7 +843,6 @@ void MaskFusion::savePly() {
 
                 memcpy(&value, &radius, sizeof(float));
                 fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
-
 
                 fobj_out <<"v " 
                          << pos[0] << " " 

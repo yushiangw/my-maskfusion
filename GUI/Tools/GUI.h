@@ -42,7 +42,8 @@ struct ModelInfo {
   ModelInfo(int id, float conf) {
     this->id = id;
     std::string idString = std::to_string(id);
-    confThreshold = new pangolin::Var<float>("oi.Model " + idString + " (conf-t)", conf, 0, 15);
+    // confThreshold = new pangolin::Var<float>("oi.Model " + idString + " (conf-t)", conf, 0, 15);
+    confThreshold = new pangolin::Var<float>("oi.Model " + idString + " (conf-t)", conf, 0, 10000);
   }
 
   // No copy constructor
@@ -373,6 +374,8 @@ class GUI {
       bifoldMorphMaskIterations = new pangolin::Var<int>("oi.Morph Mask Iterations", 0, 0, 10);
       bifoldMorphMaskRadius = new pangolin::Var<int>("oi.Morph Mask Radius", 2, 1, 5);
       bifoldNonstaticThreshold = new pangolin::Var<float>("oi.Nonstatic Thresh", 0.5, 0, 1);
+      
+      patch_conf = new pangolin::Var<float>("oi.conf", 10, 0, 1000000);
   }
 
 
@@ -402,6 +405,7 @@ class GUI {
       if(bifoldMorphMaskIterations) delete bifoldMorphMaskIterations;
       if(bifoldMorphMaskRadius) delete bifoldMorphMaskRadius;
       if(bifoldNonstaticThreshold) delete bifoldNonstaticThreshold;
+      if(patch_conf) delete patch_conf;
   }
 
   void deleteCRFParameter(){
@@ -741,6 +745,8 @@ class GUI {
   pangolin::Var<int> *bifoldMorphEdgeRadius = nullptr;
   pangolin::Var<int> *bifoldMorphMaskIterations = nullptr;
   pangolin::Var<int> *bifoldMorphMaskRadius = nullptr;
+
+  pangolin::Var<float> *patch_conf = nullptr;
 
   pangolin::DataLog resLog, inLog;
   pangolin::Plotter *resPlot, *inPlot;
