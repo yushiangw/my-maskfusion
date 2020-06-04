@@ -279,7 +279,7 @@ class MaskFusion {
   /**
    * Saves out a .ply mesh file of the current model
    */
-  void savePly();
+  void savePly(bool use_tick_tag=false);
 
   void exportPoses();
 

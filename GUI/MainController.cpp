@@ -501,6 +501,12 @@ void MainController::run() {
                 if (frameskip && Stopwatch::getInstance().getTimings().at("Run") > 1000.f / 30.f) {
                     framesToSkip = int(Stopwatch::getInstance().getTimings().at("Run") / (1000.f / 30.f));
                 }
+
+                if(maskFusion->getTick() %2 ==0)
+                {
+                    maskFusion->savePly(true);
+                }
+
             }
         } else if (pangolin::Pushed(*gui->skip)) {
             maskFusion->setTick(maskFusion->getTick() + 1);

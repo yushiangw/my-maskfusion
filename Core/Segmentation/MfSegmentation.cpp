@@ -26,7 +26,7 @@
 #include <memory>
 #include <algorithm>
 
-#define SHOW_DEBUG_VISUALISATION
+//#define SHOW_DEBUG_VISUALISATION
 
 
 //#define WRITE_MASK_FILES

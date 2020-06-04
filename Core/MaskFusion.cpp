@@ -270,11 +270,11 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
 
                     // Don't allow big jumps (remove jumping models)
                     float d = t.topRightCorner(3, 1).norm(); // Hack, do something reasonable
-                    if(d > 0.2){
-                        std::cout << "Removing model due to movement." << std::endl;
-                        itr = inactivateModel(itr);
-                    }
-                    
+                    // if(d > 0.2){
+                    //     std::cout << "Removing model due to movement." << std::endl;
+                    //     itr = inactivateModel(itr);
+                    // }
+
                 } else {
                     mp->updateStaticPose(globalModel->getPose()); // cam->cam_0=object_0 (cam_0->object_0 = identity)
                 }
@@ -735,57 +735,77 @@ unsigned char MaskFusion::getNextModelID(bool assign) {
     return next;
 }
 
-void MaskFusion::savePly() {
+void MaskFusion::savePly( bool use_tick_tag ) {
     std::cout << "Exporting PLYs..." << std::endl;
 
-    auto exportModelPLY = [this](ModelPointer& model) {
+    auto exportModelPLY = [this,use_tick_tag](ModelPointer& model) {
 
-        std::string filename = exportDir + "cloud-" + std::to_string(model->getID()) + ".ply";
+        std::string filename;
+        if(use_tick_tag){
+          filename= exportDir + "cloud-" + std::to_string(model->getID()) + "_fid_"+std::to_string(getTick()) + ".ply";
+        }else{
+          filename= exportDir + "cloud-" + std::to_string(model->getID()) + ".ply";
+        }
+
         std::cout << "Storing PLY-cloud to " << filename << std::endl;
 
         // Open file
-        std::ofstream fs;
-        fs.open(filename.c_str());
 
         Model::SurfelMap surfelMap = model->downloadMap();
         surfelMap.countValid(model->getConfidenceThreshold());
         std::cout << "Extarcted " << surfelMap.numValid << " out of " << surfelMap.numPoints << " points." << std::endl;
 
 
-        std::string filename2 = exportDir + "cloud-" + std::to_string(model->getID()) + "_vis.obj";
-        std::ofstream fobj_out(filename2.c_str());
-        fobj_out << "# "  << surfelMap.numValid << "\n";
+        std::string filename2;
+        if(use_tick_tag){
+          filename2 = exportDir + "cloud-" + std::to_string(model->getID()) + "_fid_"+std::to_string(getTick()) + "_vis.obj";
+        }else{
+          filename2 = exportDir + "cloud-" + std::to_string(model->getID()) + "_vis.obj";
+        }
 
+        bool save_file1=!use_tick_tag;
 
-        // Write header
-        fs << "ply";
-        fs << "\nformat "
-           << "binary_little_endian"
-           << " 1.0";
+        std::ofstream fpout;
 
-        // Vertices
-        fs << "\nelement vertex " << surfelMap.numValid;
-        fs << "\nproperty float x"
-              "\nproperty float y"
-              "\nproperty float z";
+        if(save_file1){
+          std::ofstream fs;
+          fs.open(filename.c_str());
 
-        fs << "\nproperty uchar red"
-              "\nproperty uchar green"
-              "\nproperty uchar blue";
+          // Write header
+          fs << "ply";
+          fs << "\nformat "
+             << "binary_little_endian"
+             << " 1.0";
 
-        fs << "\nproperty float nx"
-              "\nproperty float ny"
-              "\nproperty float nz";
+          // Vertices
+          fs << "\nelement vertex " << surfelMap.numValid;
+          fs << "\nproperty float x"
+                "\nproperty float y"
+                "\nproperty float z";
 
-        fs << "\nproperty float radius";
+          fs << "\nproperty uchar red"
+                "\nproperty uchar green"
+                "\nproperty uchar blue";
 
-        fs << "\nend_header\n";
+          fs << "\nproperty float nx"
+                "\nproperty float ny"
+                "\nproperty float nz";
 
-        // Close the file
-        fs.close();
+          fs << "\nproperty float radius";
 
+          fs << "\nend_header\n";
+
+          // Close the file
+          fs.close(); 
+          fpout.open(filename.c_str(), std::ios::app | std::ios::binary);
+        }
+        
         // Open file in binary appendable
-        std::ofstream fpout(filename.c_str(), std::ios::app | std::ios::binary);
+        // std::ofstream fpout(filename.c_str(), std::ios::app | std::ios::binary);
+
+
+        std::ofstream fobj_out(filename2.c_str());
+        fobj_out << "# "  << surfelMap.numValid << "\n"; 
 
         Eigen::Vector4f center(0, 0, 0, 0);
 
@@ -816,37 +836,40 @@ void MaskFusion::savePly() {
                 nor[0] *= -1;
                 nor[1] *= -1;
                 nor[2] *= -1;
-
-                float value;
-                memcpy(&value, &pos[0], sizeof(float));
-                fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
-
-                memcpy(&value, &pos[1], sizeof(float));
-                fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
-
-                memcpy(&value, &pos[2], sizeof(float));
-                fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
-
                 unsigned char r = int(col[0]) >> 16 & 0xFF;
                 unsigned char g = int(col[0]) >> 8 & 0xFF;
                 unsigned char b = int(col[0]) & 0xFF;
 
-                fpout.write(reinterpret_cast<const char*>(&r), sizeof(unsigned char));
-                fpout.write(reinterpret_cast<const char*>(&g), sizeof(unsigned char));
-                fpout.write(reinterpret_cast<const char*>(&b), sizeof(unsigned char));
+                if(save_file1){
+                      float value;
+                      memcpy(&value, &pos[0], sizeof(float));
+                      fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
 
-                memcpy(&value, &nor[0], sizeof(float));
-                fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
+                      memcpy(&value, &pos[1], sizeof(float));
+                      fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
 
-                memcpy(&value, &nor[1], sizeof(float));
-                fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
+                      memcpy(&value, &pos[2], sizeof(float));
+                      fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
 
-                memcpy(&value, &nor[2], sizeof(float));
-                fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
 
-                memcpy(&value, &radius, sizeof(float));
-                fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
+                      fpout.write(reinterpret_cast<const char*>(&r), sizeof(unsigned char));
+                      fpout.write(reinterpret_cast<const char*>(&g), sizeof(unsigned char));
+                      fpout.write(reinterpret_cast<const char*>(&b), sizeof(unsigned char));
 
+                      memcpy(&value, &nor[0], sizeof(float));
+                      fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
+
+                      memcpy(&value, &nor[1], sizeof(float));
+                      fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
+
+                      memcpy(&value, &nor[2], sizeof(float));
+                      fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
+
+                      memcpy(&value, &radius, sizeof(float));
+                      fpout.write(reinterpret_cast<const char*>(&value), sizeof(float));
+                }
+
+                
                 fobj_out <<"v " 
                          << pos[0] << " " 
                          << pos[1] << " " 
@@ -865,8 +888,12 @@ void MaskFusion::savePly() {
         center /= surfelMap.numValid;
         std::cout << "Exported model with center: \n" << center << std::endl;
 
-        // Close file
-        fs.close();
+        // Close file 
+
+        if(save_file1){
+          fpout.close();
+        }
+
         fobj_out.close();
     };
 
