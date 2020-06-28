@@ -107,7 +107,15 @@ MainController::MainController(int argc, char* argv[])
 
     std::string baseDir;
     Parse::get().arg(argc, argv, "-basedir", baseDir);
-    if (baseDir.length()) baseDir += '/';
+    
+    if (baseDir.length())
+    {
+        baseDir += '/';
+    }
+
+    if(baseDir.back()!='/'){
+        baseDir.back()='/';
+    }
 
     std::string calibrationFile;
     Parse::get().arg(argc, argv, "-cal", calibrationFile);
@@ -153,7 +161,8 @@ MainController::MainController(int argc, char* argv[])
         std::cout<<"-dir mode\n";
         
         Parse::get().arg(argc, argv, "-dir", logFile);
-        
+
+
         if (logFile.length()) {
             logFile += '/';  // "colorDir"
             std::string depthDir, maskDir, depthPrefix, colorPrefix, maskPrefix;
@@ -162,9 +171,14 @@ MainController::MainController(int argc, char* argv[])
             Parse::get().arg(argc, argv, "-colorprefix", colorPrefix);
             Parse::get().arg(argc, argv, "-depthprefix", depthPrefix);
             Parse::get().arg(argc, argv, "-maskprefix", maskPrefix);
+
+            int depthshift;
+            Parse::get().arg(argc, argv, "-depthshift", depthshift);
+
             
-            std::cout << "depthdir=" << depthDir<<"\n";
-            std::cout << "maskdir="  << maskDir<<"\n" ;
+            std::cout << "colorDir=" << baseDir + logFile<<"\n";
+            std::cout << "depthdir=" << baseDir + depthDir<<"\n";
+            std::cout << "maskdir="  << baseDir + maskDir<<"\n" ;
             std::cout << "colorPrefix=" << colorPrefix<<"\n";
             std::cout << "depthPrefix=" << depthPrefix<<"\n";
             std::cout << "maskPrefix =" << maskPrefix<<"\n" ;
@@ -174,7 +188,10 @@ MainController::MainController(int argc, char* argv[])
             if (maskDir.length()) maskDir += '/';
             //else maskDir = logFile;
             int indexW = -1;
-            ImageLogReader* imageLogReader = new ImageLogReader(baseDir + logFile, baseDir + depthDir, baseDir + maskDir,
+            ImageLogReader* imageLogReader = new ImageLogReader(baseDir + logFile, 
+                                                                baseDir + depthDir, 
+                                                                baseDir + maskDir,
+                                                                depthshift,
                                                                 Parse::get().arg(argc, argv, "-indexW", indexW) > -1 ? indexW : 4, colorPrefix,
                                                                 depthPrefix, maskPrefix, Parse::get().arg(argc, argv, "-f", tmpString) > -1);
 

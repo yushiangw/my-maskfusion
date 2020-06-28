@@ -62,8 +62,9 @@ static std::string cvTypeToString(int type) {
   return r;
 }
 
-ImageLogReader::ImageLogReader(std::string colorDirectory, std::string depthDirectory, std::string maskDirectory, unsigned indexWidth,
-                               std::string colorPrefix, std::string depthPrefix, std::string maskPrefix, bool flipColors)
+ImageLogReader::ImageLogReader(std::string colorDirectory, std::string depthDirectory, std::string maskDirectory, 
+                              int depthshift_in, unsigned indexWidth,
+                              std::string colorPrefix, std::string depthPrefix, std::string maskPrefix, bool flipColors)
     : LogReader(colorDirectory, flipColors),
       depthImagesDir(depthDirectory),
       maskImagesDir(maskDirectory),
@@ -123,10 +124,13 @@ ImageLogReader::ImageLogReader(std::string colorDirectory, std::string depthDire
     maxMasks = numMaskImages;
   }
 
+  depthshift = depthshift_in;
+
   std::cout
     <<"numColorImages ="<<numColorImages<<"\n"
     <<"numDepthImages ="<<numDepthImages<<"\n"
-    <<"numMaskImages  ="<<numMaskImages<<"\n";
+    <<"numMaskImages  ="<<numMaskImages<<"\n"
+    <<"depthshift = "<<depthshift<<"\n";
 
   if (numColorImages != numDepthImages) throw std::invalid_argument("Error: Number of RGB-frames != Depth-frames!");
   if (hasMasksGT && (numColorImages != numMaskImages)) throw std::invalid_argument("Error: Number of RGB-frames != Mask-frames!");
@@ -278,7 +282,11 @@ FrameDataPointer ImageLogReader::loadFrameFromDrive(const size_t& index) {
       unsigned depthIdx = 0;
       for (int i = 0; i < result->depth.rows; ++i) {
         unsigned short* pixel = result->depth.ptr<unsigned short>(i);
-        for (int j = 0; j < result->depth.cols; ++j) ((float*)newDepth.data)[depthIdx++] = 0.001f * pixel[j];
+        for (int j = 0; j < result->depth.cols; ++j) {
+          //((float*)newDepth.data)[depthIdx++] = 0.001f * pixel[j];
+          ((float*)newDepth.data)[depthIdx++] =  pixel[j] / ((float)depthshift);
+        }
+        
         //for (int j = 0; j < result->depth.cols; ++j) ((float*)newDepth.data)[depthIdx++] = 0.0002f * pixel[j]; // FIXME
       }
     } else {

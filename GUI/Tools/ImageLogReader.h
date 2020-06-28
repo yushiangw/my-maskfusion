@@ -36,7 +36,9 @@
 
 class ImageLogReader : public LogReader {
  public:
-  ImageLogReader(std::string colorDirectory, std::string depthDirectory, std::string maskDirectory, unsigned indexWidth = 4,
+  ImageLogReader(std::string colorDirectory, std::string depthDirectory, std::string maskDirectory, 
+                 int depthshift,
+                 unsigned indexWidth = 4,
                  std::string colorPrefix = "", std::string depthPrefix = "", std::string maskPrefix = "", bool flipColors = false);
 
   virtual ~ImageLogReader();
@@ -89,6 +91,8 @@ class ImageLogReader : public LogReader {
   std::string maskPre;
   unsigned indexW = 4;
   unsigned startIndex = 0;
+
+  int depthshift;
 
   // Data
   std::vector<FrameDataPointer> frames;
