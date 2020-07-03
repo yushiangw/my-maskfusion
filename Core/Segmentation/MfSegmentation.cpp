@@ -308,7 +308,7 @@ SegmentationResult MfSegmentation::performSegmentation(std::list<std::shared_ptr
     for (size_t i = 0; i < total; ++i)
         compModelOverlap(cvLabelComps.at<int>(i), modelIDToIndex[projectedIDs.data[i]])++;
 
-    if(nMasks){
+    if(nMasks>0 && nComponents>0){
 
         // Compute component-mask overlap
         for (size_t i = 0; i < total; ++i){

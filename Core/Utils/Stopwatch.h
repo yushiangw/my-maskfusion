@@ -47,6 +47,7 @@
   do {                                                                                    \
     Stopwatch::getInstance().tick(name, Stopwatch::getInstance().getCurrentSystemTime()); \
   } while (false)
+// #define TICK(name) (printf("[debug]-L%d :%s\n",__LINE__, name))
 
 #define TOCK(name)                                                                        \
   do {                                                                                    \
@@ -58,7 +59,7 @@
 #define TOCK(name) ((void)0)
 
 #define TICK(name) ((void)0)
-
+ 
 #endif
 
 class Stopwatch {

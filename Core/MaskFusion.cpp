@@ -125,7 +125,7 @@ MaskFusion::~MaskFusion() {
     if (iclnuim) {
         savePly();
     }
-
+    std::cout<<"~MaskFUsion"<<std::endl;
     for (std::map<std::string, ComputePack*>::iterator it = computePacks.begin(); it != computePacks.end(); ++it) {
         delete it->second;
     }
@@ -150,8 +150,16 @@ void MaskFusion::preallocateModels(unsigned count) {
                     std::make_shared<Model>(id0++, initConfThresObject, false, true, enablePoseLogging, modelMatchingType));
 }
 
-SegmentationResult MaskFusion::performSegmentation(FrameDataPointer frame) {
-    return labelGenerator.performSegmentation(models, frame, getNextModelID(), spawnOffset >= modelSpawnOffset);
+SegmentationResult MaskFusion::performSegmentation(FrameDataPointer frame) 
+{   
+    int num = models.size() + inactiveModels.size();
+    int max_num=8;
+    if( num < max_num ){
+        return labelGenerator.performSegmentation(models, frame, getNextModelID(), spawnOffset >= modelSpawnOffset);
+    }else{
+        return labelGenerator.performSegmentation(models, frame, getNextModelID(), 0);
+    }
+
 }
 
 void MaskFusion::createTextures() {
@@ -329,10 +337,12 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
 
                     spawnObjectModel();
                     spawnOffset = 0;
+                    std::cout << "[done]spawnObjectModel" << std::endl;
 
                     newModel->setMaxDepth(getMaxDepth(newModelData));
                     newModel->setClassID(newModelData.classID);
 
+                    std::cout << "moveNewModelToList" << std::endl;
                     moveNewModelToList();
                 }
 
@@ -345,7 +355,10 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
 
                 // Initialise new model data
                 if (segmentationResult.hasNewLabel) {
+                    // std::cout << "Initialise new model." << std::endl;
+
                     ModelPointer& nm = models.back();
+
                     nm->predictIndices(tick, maxDepthProcessed, timeDelta);
 
                     nm->fuse(tick, textureRGB.get(), textureMask.get(), textureDepthMetric.get(),
@@ -354,6 +367,7 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
                     // newModel->predictIndices(tick, maxDepthProcessed, timeDelta);
 
                     std::vector<float> test;
+                    
                     nm->clean(tick, test, timeDelta, maxDepthProcessed, false, textureDepthMetricFiltered.get(),
                               textureMask.get());
 
@@ -362,8 +376,8 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
                         globalModel->eraseErrorGeometry(textureDepthMetricFiltered.get());
                     }
                 }
-
-                // Check for nonstatic objects
+                    
+                // Check for nonstatic objects 
                 it = models.begin();
                 for (unsigned i = 1; i < models.size(); i++) {
                     ModelPointer& m = *++it;
@@ -371,6 +385,8 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
                 }
 
                 // increase confidence of object-models
+                // std::cout << "confidence object"<<std::endl;
+
                 it = models.begin();
                 for (unsigned i = 1; i < models.size(); i++) {
                     ModelPointer& m = *++it;
@@ -379,7 +395,9 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
                 }
             }
 
+
             if (reloc) {
+                // std::cout << "reloc"<<std::endl;
                 if (!lost) {
                     Eigen::MatrixXd covariance = globalModel->getFrameOdometry().getCovariance();
 
@@ -425,7 +443,10 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
 
         std::vector<Ferns::SurfaceConstraint> constraints;
 
+        // std::cout << "predict at"<<tick<<std::endl;
         predict();
+
+        // std::cout << "predict done at"<<tick<<std::endl;
 
         Eigen::Matrix4f recoveryPose = globalModel->getPose();
 
@@ -562,14 +583,15 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
                 globalModel->getIndexMap().synthesizeDepth(globalModel->getPose(), globalModel->getModelBuffer(), maxDepthProcessed, initConfThresGlobal,
                                                            tick, tick - timeDelta, std::numeric_limits<unsigned short>::max());
             }
-
             for (auto model : models) {
                 model->clean(tick, rawGraph, timeDelta, maxDepthProcessed, fernAccepted, textureDepthMetricFiltered.get(),
                              textureMask.get());
             }
+
+
         }
     }
-
+    
     // Update index-map textures
     predict();
 
@@ -578,9 +600,12 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
         tick++;
     }
 
+    // std::cout<<"moveNewModelToList"<<std::endl;
     moveNewModelToList();
 
     bool first = true;
+
+    // std::cout<<"logging loop"<<std::endl;
 
     for (auto model : models) {
         if (model->isLoggingPoses()) {
@@ -602,12 +627,14 @@ bool MaskFusion::processFrame(FrameDataPointer frame, const Eigen::Matrix4f* inP
 
         }
         first = false;
+
         model->incrementAge();
         // std::cout << "Model " << model->getID() << " has " << model->lastCount() << " surfels." << std::endl;
     }
 
     TOCK("Run");
 
+    // std::cout<<"done"<<std::endl;
     return false;
 }
 
@@ -915,6 +942,7 @@ void MaskFusion::exportPoses() {
             auto poseLog = m->getPoseLog();
             for (auto& p : poseLog) {
 #ifdef LOG_TICKS
+                // main thread saving tick (cofusion save frame.timestamp) 
                 fs << p.ts-1;
 #else
                 fs << double(p.ts) * 1e-6;

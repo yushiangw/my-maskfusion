@@ -29,6 +29,8 @@ SegmentationResult PreSegmentation::performSegmentation(std::list<std::shared_pt
                                                        FrameDataPointer frame,
                                                        unsigned char nextModelID,
                                                        bool allowNew){
+
+    std::cout<<"PreSegmentation"<<std::endl;
     assert(frame->mask.type() == CV_8UC1);
     assert(frame->mask.isContinuous());
     static std::vector<unsigned char> mapping(256, 0);  // FIXME
