@@ -484,7 +484,7 @@ void MainController::run() {
                     framesToSkip = 0;
                 }
 
-                Eigen::Matrix4f* currentPose = 0;
+                Eigen::Matrix4f* currentPose =nullptr;
 
                 if (groundTruthOdometry) {
                     currentPose = new Eigen::Matrix4f;
@@ -513,6 +513,7 @@ void MainController::run() {
 
                 if (currentPose) {
                     delete currentPose;
+                    currentPose=nullptr;
                 }
 
                 if (frameskip && Stopwatch::getInstance().getTimings().at("Run") > 1000.f / 30.f) {
