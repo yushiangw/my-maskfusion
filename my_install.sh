@@ -96,8 +96,8 @@ fi # --install-packages
 
 # Create virtual python environment and install packages
 highlight "Setting up virtual python environment..."
-virtualenv python-environment
-source python-environment/bin/activate
+#virtualenv python-environment
+#source python-environment/bin/activate
 pip3 install pip --upgrade
 #pip3 install tensorflow-gpu==1.8.0
 pip3 install scikit-image
